@@ -93,7 +93,9 @@ export class BillableComponent implements OnInit {
     }
 
     deleteBillable(nId) {
-        this.deleteBillableEvent.emit(nId);
+        if (window.confirm(' Are you sure you want to delete this line? This action cannot be undone.')) {
+            this.deleteBillableEvent.emit(nId);
+        }
     }
 
     showForm(): boolean {
