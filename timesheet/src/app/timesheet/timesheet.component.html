@@ -1,0 +1,46 @@
+<div class="timesheet-functionality">
+    <div>
+        <button class="btn btn-outline-primary" (click)="setNewBillable()">New</button>
+        <button class="btn btn-outline-success" (click)="submitBillables()">Submit</button>
+    </div>
+    <div class="form-group row">
+        <label class="col-form-label">Default Hourly Rate</label>
+        <div class="col-sm-4">
+            <input class="form-control" #defaultRate (change)="updateDefaultRate(defaultRate.value)" value="{{getDisplayRate()}}">
+        </div>
+    </div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>State</th>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Duration</th>
+            <th>Hourly Rate</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngIf="objTimeSheet.objNewBillable">
+            <tr billable
+                [objBillable]="objTimeSheet.objNewBillable"
+
+                (setNewBillableCancelledEvent)="setNewBillableCancelled($event)"
+                (setNewBillableActiveEvent)="setNewBillableActive($event)"
+            >
+            </tr>
+        </ng-container>
+        <tr billable
+            *ngFor="let Billable of arrBillables"
+            [ngClass]="getBillableClasses(Billable)"
+            [objBillable]="Billable"
+
+            (deleteBillableEvent)="deleteBillable($event)"
+            (updateBillableEvent)="updateBillable($event)"
+        ></tr>
+    </tbody>
+</table>

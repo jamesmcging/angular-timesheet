@@ -1,0 +1,55 @@
+<ng-container>
+    <td>{{getDisplayState()}}</td>
+    <td>{{getDisplayDate()}}</td>
+    <td>
+        <ng-container *ngIf="showForm(); else showTitleValue">
+            <input class="form-control-sm" #title (blur)="updateTitle(title.value)" value="{{objBillable.sTitle}}">
+        </ng-container>
+        <ng-template #showTitleValue>
+            {{objBillable.sTitle}}
+        </ng-template>
+    </td>
+    <td>
+        <ng-container *ngIf="showForm(); else showTypeValue">
+            <select class="form-control-sm" #type (change)="updateType(type.value)" [(ngModel)]="objBillable.nType">
+                <option>Select type of billable</option>
+                <option value="1">Telephone Call</option>
+                <option value="2">Drafting Document</option>
+                <option value="3">Research</option>
+            </select>
+        </ng-container>
+        <ng-template #showTypeValue>
+            {{getDisplayType()}}
+        </ng-template>
+    </td>
+    <td>
+        <ng-container *ngIf="showForm(); else showDurationValue">
+            {{getDisplayDuration()}}
+            <input type="range" min="60" max="43200" step="60" #duration (change)="updateDuration(duration.value)"  [(ngModel)]="objBillable.nDuration">
+        </ng-container>
+        <ng-template #showDurationValue>
+            {{getDisplayDuration()}}
+        </ng-template>
+    </td>
+    <td>{{getDisplayRate()}}</td>
+    <td>{{getTotal()}}</td>
+    <td>
+        <div [ngSwitch]="true">
+            <div *ngSwitchCase="objBillable.nState === 1">
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-success" (click)="setNewBillableActive()">Save</button>
+                    <button class="btn btn-sm btn-outline-warning" (click)="setNewBillableCancelled()">Cancel</button>
+                </div>
+            </div>
+            <div *ngSwitchCase="objBillable.nState === 2">
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-outline-secondary" (click)="setBillableState(3)">Edit</button>
+                    <button class="btn btn-sm btn-outline-danger" (click)="deleteBillable(objBillable.nId)">Delete</button>
+                </div>
+            </div>
+            <div *ngSwitchCase="objBillable.nState === 3">
+                <button class="btn btn-sm btn-outline-success" (click)="setBillableState(2)">Save</button>
+            </div>
+        </div>
+    </td>
+</ng-container>
