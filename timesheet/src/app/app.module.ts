@@ -7,7 +7,7 @@ import { TimeSheetComponent } from './timesheet/timesheet.component';
 
 import { TimeSheetService } from './timesheet.service';
 import { BillableComponent } from './billable/billable.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -18,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [
         TimeSheetService

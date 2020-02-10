@@ -1,11 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Billable} from '../models/billable.class';
 import {BillableState} from '../models/billableState.enum';
-import {BillableType} from '../models/billableType.enum';
 
 
 @Component({
-  selector: 'tr[billable]',
+  selector: '[app-billable]',
   templateUrl: './billable.component.html',
   styleUrls: ['./billable.component.css']
 })
@@ -19,9 +18,17 @@ export class BillableComponent implements OnInit {
     @Output() deleteBillableEvent = new EventEmitter<number>();
     @Output() updateBillableEvent = new EventEmitter<Billable>();
 
-    constructor() {}
+    constructor() {
+        if (!this.objBillable) {
+            this.objBillable = new Billable();
+        }
+    }
 
     ngOnInit() {}
+
+    getState() {
+        return this.objBillable.nState;
+    }
 
     getDisplayState() {
         return this.objBillable.getDisplayState();
@@ -68,7 +75,6 @@ export class BillableComponent implements OnInit {
      * This is triggered by the Save button in the billable item.
      */
     setNewBillableActive() {
-
         if (!this.objBillable.sTitle) {
             window.alert('In order to save this line you need to give it a title');
         } else if (!this.objBillable.nType) {
@@ -110,7 +116,7 @@ export class BillableComponent implements OnInit {
         this.objBillable.nType = parseInt(sNewType, 10);
     }
 
-    updateDuration(nNewDuration: string) {
-        this.objBillable.nDuration = parseInt(nNewDuration, 10);
+    updateDuration(sNewDuration: string) {
+        this.objBillable.nDuration = parseInt(sNewDuration, 10);
     }
 }

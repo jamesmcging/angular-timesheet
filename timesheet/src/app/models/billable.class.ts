@@ -10,6 +10,13 @@ export class Billable {
     nDuration: number; // seconds
     nRate: number; // cents per hour
 
+    constructor() {
+        this.nState = BillableState.NEW;
+        this.nDate = new Date().getTime();
+        this.nDuration = 60;
+        this.nRate = 1;
+    }
+
     setBillableState(nNewBillableState: BillableState): boolean {
         if (this.nState !== nNewBillableState) {
             if (this.nState === BillableState.NEW && nNewBillableState === BillableState.ACTIVE) {

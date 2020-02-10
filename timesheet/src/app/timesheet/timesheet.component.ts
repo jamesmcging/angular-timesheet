@@ -11,7 +11,7 @@ import {BillableState} from '../models/billableState.enum';
 })
 export class TimeSheetComponent implements OnInit {
 
-    private objTimeSheet: TimeSheet;
+    objTimeSheet: TimeSheet;
     arrBillables: Billable[];
 
     constructor(
@@ -83,7 +83,7 @@ export class TimeSheetComponent implements OnInit {
     }
 
     getBillableClasses(objBillable: Billable) {
-        switch(objBillable.nState) {
+        switch (objBillable.nState) {
             case BillableState.ACTIVE: return {'table-success': true};
             case BillableState.EDITABLE: return {'table-info': true};
             // case BillableState.NEW: return {};

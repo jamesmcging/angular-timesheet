@@ -4,6 +4,10 @@ import { TimeSheetService } from './timesheet.service';
 import { Billable } from './models/billable.class';
 
 describe('TimeSheetService', () => {
+
+    // let component: BillableComponent;
+    // let fixture: ComponentFixture<BillableComponent>;
+
     beforeEach(() => TestBed.configureTestingModule({}));
 
     it('should be created', () => {
@@ -24,6 +28,10 @@ describe('TimeSheetService', () => {
         const objFirstNewBillable = objTimeSheet.setNewBillable();
         const objSecondNewBillable = objTimeSheet.setNewBillable();
         expect(objSecondNewBillable).not.toBe(jasmine.any(Billable));
+    });
+
+    it ('should remove Billable from arrBillables when deleteBillableById is called', () => {
+
     });
 
 });

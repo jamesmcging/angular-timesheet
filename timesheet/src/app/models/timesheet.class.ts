@@ -31,6 +31,7 @@ export class TimeSheet {
         this.objNewBillable.nDate = new Date().getTime();
         this.objNewBillable.nDuration = 60;
         this.objNewBillable.nRate = this.nDefaultRate;
+
         return this.objNewBillable;
     }
 

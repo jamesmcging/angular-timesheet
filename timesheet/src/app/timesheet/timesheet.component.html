@@ -26,21 +26,21 @@
     </thead>
     <tbody>
         <ng-container *ngIf="objTimeSheet.objNewBillable">
-            <tr billable
+            <tr app-billable
                 [objBillable]="objTimeSheet.objNewBillable"
 
                 (setNewBillableCancelledEvent)="setNewBillableCancelled($event)"
                 (setNewBillableActiveEvent)="setNewBillableActive($event)"
-            >
+            ></tr>
+        </ng-container>
+        <ng-container *ngFor="let Billable of arrBillables">
+            <tr app-billable
+                [objBillable]="Billable"
+                [ngClass]="getBillableClasses(Billable)"
+
+                (deleteBillableEvent)="deleteBillable($event)"
+                (updateBillableEvent)="updateBillable($event)">
             </tr>
         </ng-container>
-        <tr billable
-            *ngFor="let Billable of arrBillables"
-            [ngClass]="getBillableClasses(Billable)"
-            [objBillable]="Billable"
-
-            (deleteBillableEvent)="deleteBillable($event)"
-            (updateBillableEvent)="updateBillable($event)"
-        ></tr>
     </tbody>
 </table>
